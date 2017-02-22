@@ -55,7 +55,7 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
         $payload = new Payload($claims, $this->validator);
 
         $this->storage->shouldReceive('add')->once()->with('foo', [], 20160);
-        $this->assertTrue($this->blacklist->add($payload));
+        $this->assertTrue($this->blacklist->add($payload, 0, true));
     }
 
     /** @test */
@@ -72,7 +72,7 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
         $payload = new Payload($claims, $this->validator, true);
 
         $this->storage->shouldReceive('add')->once()->with('foo', [], 20160);
-        $this->assertTrue($this->blacklist->add($payload));
+        $this->assertTrue($this->blacklist->add($payload, 0, true));
     }
 
     /** @test */
@@ -89,7 +89,7 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
         $payload = new Payload($claims, $this->validator, true);
 
         $this->storage->shouldReceive('add')->never();
-        $this->assertFalse($this->blacklist->add($payload));
+        $this->assertFalse($this->blacklist->add($payload, 0, true));
     }
 
     /** @test */
@@ -107,7 +107,7 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
 
         $this->storage->shouldReceive('add')->never();
         $this->blacklist->setRefreshTTL(0);
-        $this->assertFalse($this->blacklist->add($payload));
+        $this->assertFalse($this->blacklist->add($payload, 0, true));
     }
 
     /** @test */

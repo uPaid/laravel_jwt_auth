@@ -41,10 +41,23 @@ class Blacklist
      * @param  \Tymon\JWTAuth\Payload  $payload
      * @return bool
      */
-    public function add(Payload $payload)
+    public function add(Payload $payload, $noDelay = true, $delay)
     {
         $exp = Utils::timestamp($payload['exp']);
         $refreshExp = Utils::timestamp($payload['iat'])->addMinutes($this->refreshTTL);
+
+        // blacklisting delay for async requests purpose
+        // $payload['iat']: time of create token (issued at)
+        // time(): actual time
+        //
+        // we set diff between create token and actual time in seconds
+        // (blacklist_delay config param)
+        // we don't put it to blacklist in the blacklist_delay time interval
+        //
+        // $noDelay: used when you want explicty forget token without delay (when use forget())
+        if ((time() - $payload['iat']) < $delay && !$noDelay) {
+            return false;
+        }
 
         // there is no need to add the token to the blacklist
         // if the token has already expired AND the refresh_ttl
@@ -71,6 +84,7 @@ class Blacklist
      */
     public function has(Payload $payload)
     {
+
         return $this->storage->has($payload['jti']);
     }
 

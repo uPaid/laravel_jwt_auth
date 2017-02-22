@@ -112,6 +112,20 @@ return [
 
     'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', true),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Refresh Token Blacklist Delay
+    |--------------------------------------------------------------------------
+    |
+    | Invalidating token delay when you refresh token in every request.
+    | Few second delay is useful with async requests.
+    |
+    */
+
+    'blacklist_delay' => env('BLACKLIST_DELAY', 5),
+
+
     /*
     |--------------------------------------------------------------------------
     | Providers

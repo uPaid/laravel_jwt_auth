@@ -43,6 +43,11 @@ class JWTManager
     protected $refreshFlow = false;
 
     /**
+     * @var int
+     */
+    protected $blacklistDelayTime = 5;
+
+    /**
      *  @param \Tymon\JWTAuth\Providers\JWT\JWTInterface  $jwt
      *  @param \Tymon\JWTAuth\Blacklist  $blacklist
      *  @param \Tymon\JWTAuth\PayloadFactory  $payloadFactory
@@ -99,7 +104,7 @@ class JWTManager
 
         if ($this->blacklistEnabled) {
             // invalidate old token
-            $this->blacklist->add($payload);
+            $this->blacklist->add($payload, false, $this->blacklistDelayTime);
         }
 
         // return the new token
@@ -117,13 +122,13 @@ class JWTManager
      * @param  Token  $token
      * @return bool
      */
-    public function invalidate(Token $token)
+    public function invalidate(Token $token, $noDelay = true)
     {
         if (! $this->blacklistEnabled) {
             throw new JWTException('You must have the blacklist enabled to invalidate a token.');
         }
 
-        return $this->blacklist->add($this->decode($token));
+        return $this->blacklist->add($this->decode($token), 0, $noDelay);
     }
 
     /**
@@ -167,6 +172,20 @@ class JWTManager
 
         return $this;
     }
+
+
+    /**
+     * Set delay between blacklisting refreshed token.
+     *
+     * @param bool  $enabled
+     */
+    public function setBlacklistDelayTime($seconds)
+    {
+        $this->blacklistDelayTime = $seconds;
+
+        return $this;
+    }
+
 
     /**
      * Set the refresh flow.
