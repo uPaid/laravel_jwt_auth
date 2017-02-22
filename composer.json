@@ -1,5 +1,5 @@
 {
-    "name": "tymon/jwt-auth",
+    "name": "uPaid/laravel_jwt_auth",
     "description": "JSON Web Token Authentication for Laravel 4 and 5",
     "keywords": [
         "jwt",
@@ -9,13 +9,12 @@
         "laravel",
         "json web token"
     ],
-    "homepage": "https://github.com/tymondesigns/jwt-auth",
+    "homepage": "https://github.com/uPaid/laravel_jwt_auth",
     "license": "MIT",
     "authors": [
         {
-            "name": "Sean Tymon",
-            "email": "tymon148@gmail.com",
-            "homepage": "http://tymondesigns.com",
+            "name": "upaid",
+            "email": "jacek.kalasz@upaid.pl",
             "role": "Developer"
         }
     ],
@@ -35,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Tymon\\JWTAuth\\": "src"
+            "uPaid\\laravel_jwt_auth\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tymon\\JWTAuth\\Test\\": "tests"
+            "uPaid\\laravel_jwt_auth\\Test\\": "tests"
         }
     },
     "extra": {
