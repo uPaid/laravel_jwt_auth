@@ -34,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "u-paid\\laravel_jwt_auth\\": "src"
+            "Tymon\\JWTAuth\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "u-paid\\laravel_jwt_auth\\Test\\": "tests"
+            "Tymon\\JWTAuth\\Test\\": "tests"
         }
     },
     "extra": {
