@@ -182,7 +182,7 @@ class JWTAuthServiceProvider extends ServiceProvider
                 $app['tymon.jwt.blacklist'],
                 $app['tymon.jwt.payload.factory']
             );
-
+            $instance->setBlacklistDelayTime($this->config('blacklist_delay'));
             return $instance->setBlacklistEnabled((bool) $this->config('blacklist_enabled'));
         });
     }

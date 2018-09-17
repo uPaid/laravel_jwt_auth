@@ -128,7 +128,7 @@ class JWTManager
             throw new JWTException('You must have the blacklist enabled to invalidate a token.');
         }
 
-        return $this->blacklist->add($this->decode($token), 0, $noDelay);
+        return $this->blacklist->add($this->decode($token), $noDelay, 0);
     }
 
     /**
