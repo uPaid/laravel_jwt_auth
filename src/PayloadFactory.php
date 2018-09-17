@@ -72,6 +72,10 @@ class PayloadFactory
      */
     public function make(array $customClaims = [])
     {
+        if(in_array('isLongTermToken', $customClaims) && $customClaims['isLongTermToken']){
+            $this->setTTL(config('jwt.longTermTtl'));
+        }
+        
         $claims = $this->buildClaims($customClaims)->resolveClaims();
 
         return new Payload($claims, $this->validator, $this->refreshFlow);
